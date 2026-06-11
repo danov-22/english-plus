@@ -11,9 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const iconMoon    = document.getElementById('iconMoon');
   const html        = document.documentElement;
 
-  const saved       = localStorage.getItem('ep-theme');
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  const initDark    = saved ? saved === 'dark' : prefersDark;
+  const saved       = localStorage.getItem('ep-theme'); 
+  const initDark    = saved === 'dark';
 
   function applyTheme(dark) {
     html.setAttribute('data-theme', dark ? 'dark' : 'light');
