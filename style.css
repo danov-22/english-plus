@@ -436,8 +436,8 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
 
 @media (max-width: 768px) {
   .hero {
-      padding-top: 7rem;
-      padding-bottom: 4rem;
+      padding-top: 15px;
+      padding-bottom: 4rem; 
   }
 
     .hero .container {
@@ -451,7 +451,7 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
     }
 
   .hero-title {
-      line-height: 1.05;
+      line-height: 1.05;  
       margin-bottom: 1.25rem;
   }
 
