@@ -58,16 +58,34 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---- SMOOTH SCROLL OFFSET -------------------------------- */
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (!target || !navbar) return;
-      e.preventDefault();
-      const top = target.getBoundingClientRect().top + window.scrollY - navbar.offsetHeight - 8;
-      window.scrollTo({ top, behavior: 'smooth' });
+/* ---- SMOOTH SCROLL OFFSET -------------------------------- */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+
+  anchor.addEventListener('click', e => {
+
+    const target = document.querySelector(
+      anchor.getAttribute('href')
+    );
+
+    if (!target || !navbar) return;
+
+    e.preventDefault();
+
+    const top =
+      target.getBoundingClientRect().top +
+      window.scrollY -
+      navbar.offsetHeight -
+      8;
+
+    window.scrollTo({
+      top,
+      behavior: 'smooth'
     });
+
   });
+
+});
+
 
   /* ---- TEACHER TABS ---------------------------------------- */
   const tabBtns      = document.querySelectorAll('.tab-btn');
@@ -93,24 +111,32 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  /* ---- FAQ ACCORDION --------------------------------------- */
-  const faqItems = document.querySelectorAll('.faq-item');
+// FAQ ACCORDION
 
-  faqItems.forEach(item => {
-    const btn    = item.querySelector('.faq-question');
-    const answer = item.querySelector('.faq-answer');
-    if (!btn || !answer) return;
+document.querySelectorAll('.faq-question').forEach(button => {
 
-    btn.addEventListener('click', () => {
-      const isOpen = btn.getAttribute('aria-expanded') === 'true';
-      faqItems.forEach(other => {
-        other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-        other.querySelector('.faq-answer')?.classList.remove('open');
-      });
-      btn.setAttribute('aria-expanded', String(!isOpen));
-      answer.classList.toggle('open', !isOpen);
+    button.addEventListener('click', () => {
+
+        const faqItem = button.closest('.faq-item');
+        const isOpen = faqItem.classList.contains('active');
+
+        // Close all FAQs
+        document.querySelectorAll('.faq-item').forEach(item => {
+            item.classList.remove('active');
+
+            item.querySelector('.faq-question')
+                .setAttribute('aria-expanded', 'false');
+        });
+
+        // Open clicked FAQ if it wasn't already open
+        if (!isOpen) {
+            faqItem.classList.add('active');
+            button.setAttribute('aria-expanded', 'true');
+        }
+
     });
-  });
+
+});
 
   /* ---- SCROLL REVEAL --------------------------------------- */
   const revealEls = document.querySelectorAll('.reveal');
