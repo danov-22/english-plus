@@ -417,6 +417,7 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   gap: 14px;
   margin-bottom: 60px;
 }
+
 .hero__trust {
   display: flex;
   flex-wrap: wrap;
@@ -424,6 +425,7 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   padding-top: 40px;
   border-top: 1px solid var(--line-soft);
 }
+
 .trust-item {
   display: flex;
   align-items: center;
@@ -436,19 +438,23 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
 
 @media (max-width: 768px) {
   .hero {
-      padding-top: 15px;
+      padding-top: 10px;
       padding-bottom: 4rem; 
   }
 
-    .hero .container {
-        padding-left: 24px;
-        padding-right: 24px;
-    }
+  .hero .container {
+      padding-left: 24px;
+      padding-right: 24px;
+  }
 
-    .hero-content {
-        padding-left: 0;
-        padding-right: 0;
-    }
+  .hero-content {
+      padding-left: 0;
+      padding-right: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;    /* Centers blocks horizontally */
+      text-align: center;     /* Centers text lines */
+  }
 
   .hero-title {
       line-height: 1.05;  
@@ -458,6 +464,47 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
   .hero-description {
       max-width: 600px;
       margin-bottom: 2rem;
+      margin-left: auto;      /* Equal margins center the block itself */
+      margin-right: auto;
+  }
+
+  .hero-content > div, .hero-content > form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+  }
+
+  .hero__trust {
+      display: grid;
+      flex-direction: column; /* Stacks the checkmarks vertically on mobile */
+      justify-content: center; 
+      justify-items: start;   /* Centers them vertically in the stack */ 
+      align-items: flex-start;    /* Centers them horizontally */
+      grid-template-columns: max-content; /* Switches from horizontal to vertical layout */
+      gap: 16px;              /* Tighter spacing for mobile stack */
+      padding-top: 40px;
+      width: 100%;            /* Ensure it fills container to allow centering */
+      margin: 0 auto;            /* Centers the entire trust block */
+      border-top: 1px solid var(--line-soft);
+  }
+
+  .trust-item {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start; /* Centers icon and text together */
+      gap: 12px;
+      color: var(--text-3);
+      font-size: .82rem;
+      font-weight: 500;
+      text-align: left;       /* Keeps icon next to text neatly */
+      width: 100%;            /* Full width for better stacking */
+  }
+
+  .trust-item svg { 
+      color: var(--brand); 
+      flex-shrink: 0; 
   }
 }
 
@@ -557,6 +604,50 @@ input, textarea, select { font-family: inherit; font-size: 1rem; }
 .pillar-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 1px; opacity: .8; }
 .pillar h4 { font-size: .92rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
 .pillar p { font-size: .86rem; color: var(--text-2); line-height: 1.65; }
+
+@media (max-width: 768px) {
+  /* 1. STACK THE MAIN GRID VERTICALLY */
+  .about__grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* 2. REPOSITION THE ACCENT BADGE SO IT STOPS OVERLAPPING */
+  .about-accent-card {
+    position: absolute;
+    bottom: 12px !important;    /* Pulls it safely inside the main card frame */
+    right: 12px !important;     /* Prevents it from clipping past the screen edge */
+    padding: 12px 16px !important; /* Slightly smaller padding for tight screen space */
+  }
+
+  /* 3. ENSURE INNER PLACEMENT CONTENT REMAINS VISIBLE AND LEFT ALIGNED */
+  .about-img-placeholder {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; /* Snaps the emoji and text to the left */
+    justify-content: center !important; 
+    padding: 24px !important;            /* Adds padding so content does not hug the edge */
+    text-align: center !important;
+    transform: none !important;            /* Disables any transforms that might cause overflow issues */
+    position: relative !important;          /* Ensures it stays within the normal flow of the document */
+  }
+
+  /* 4. PREVENT TEXT RUNNING UNDERNEATH THE BADGE CARD */
+  .about-img-placeholder .img-icon,
+  .about-img-placeholder span {
+    transform: translateX(-49px) !important; /* Shifts content left to avoid being hidden under the badge */  
+    max-width: 50% !important; /* Stops content at 55% width, forcing text to wrap safely */
+  }
+
+  .about-accent-card {
+   position: absolute !important;
+   bottom: 12px !important;    
+   right: 12px !important;     
+   padding: 12px 16px !important; 
+   transform: none !important;              /* Ensures the badge doesn't move with the text */
+  }
+}
+
 
 /* --- PROGRAMS --------------------------------------------- */
 .programs__grid {
